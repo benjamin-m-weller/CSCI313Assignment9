@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+  <title>moth</title>
+  <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+  <script src="moth2.js"></script>
+  <script>
+
+  function main() {
+
+    // CANVAS
+    const CW = 300; // canvas width
+    const CH = 370; // canvas height
+    //
+    var c = document.createElement("CANVAS");
+    c.id = "canvas"; // used by stage
+    c.width  = CW;
+    c.height = CH;
+    c.style.border = "1px solid #000000";
+    var d = document.getElementById("div");
+    document.body.insertBefore(c,d);
+
+    // STAGE 1/2
+    var stage = new createjs.Stage("canvas");
+ 
+    // BACKGROUND
+    const BC = "#C0C0C0";
+    //
+    var bkgnd = new createjs.Shape();
+    bkgnd.graphics.beginFill(BC).drawRect(0,0,CW,CH);
+    stage.addChild(bkgnd);
+
+    // LIGHT
+    const LS = 60; // size
+    const LX = (CW-LS)/2, LY = (CH-LS)/2; // position
+    //
+    var light = new_RoundSquare("#FFFF00",LS,LX,LY);
+    light.collider = function(){
+      return { 
+        xL:this.x, xR:this.x+LS,
+        yT:this.y, yB:this.y+LS
+      }
+    }
+    stage.addChild(light);
+
+    // MOTH
+    const MX = 50, MY = 50; // position
+    const MS = 5;           // speed
+    const MDX = 1, MDY = 1; // direction
+    //
+    Moth_setMoveBounds(0,CW,0,CH);
+    //
+    var moth = new Moth();
+    moth.setPosition(MX,MY);
+    moth.setVelocity(MS,MDX,MDY);
+    stage.addChild(moth);
+
+    // STAGE 2/2
+    stage.update();
+
+    // TICKER
+    createjs.Ticker.setFPS(60);
+    createjs.Ticker.setPaused(true);
+	
+    createjs.Ticker.on('tick',function(e){
+      if (!e.paused ) {
+        moth.update();
+        if ( moth.hits(light) ){ moth.dies(); };
+        moth.render();
+        stage.update();
+      }
+    });
+  }
+
+  function start() {
+    createjs.Ticker.setPaused(false);
+  }
+
+  function stop() {
+    createjs.Ticker.setPaused(true);
+  }
+
+  function new_RoundSquare(color,size,xPos,yPos) {
+    const RADIUS = 5;
+    var s = new createjs.Shape();
+    s.graphics.beginFill(color).drawRoundRect(0,0,size,size,RADIUS);
+    s.x = xPos;
+    s.y = yPos;
+    return s;
+  }
+
+  </script>
+</head>
+<body onload="main()">
+  <div id="div">
+    <button onclick="start()">start</button>
+    <button onclick="stop()">stop</button>
+  </div>
+</body>
+</html>

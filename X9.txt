@@ -1,0 +1,30 @@
+
+X9: Game Manager
+
+This folder contains two versions of a "moth" program. They
+are functionally equivalent. The first version is moth1.htm
+and moth2.js. The second version is moth2.htm, game.htm, and
+moth2.js. (moth1.js can be substituted for moth2.js.)
+
+game.htm contains the "game manager". This governs the game's
+response to events like user actions and the Ticker 'tick'.
+The game manager is notified when these events occur. It can
+then use the current game state to decide what the response
+should be.
+
+What to do: (20 pts)
+
+Suppose the first version was written by a newbie programmer.
+Develop step-by-step instructions that will enable this newbie
+to create the second version. For each step, explain why that
+step is necessary. Strive for a balance between detail and
+generality. Too much detail makes the job "mindless" and the
+newbie won't learn anything. Too much generality and the
+newbie may not be able to figure out what to do or how to do
+it.
+
+Bonus: (1 pt)
+
+Impress the newbie with your programming skills by extending
+the second version to simulate any number of moths.
+
