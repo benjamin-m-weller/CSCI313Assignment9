@@ -3,7 +3,7 @@ X9: Game Manager
 
 This folder contains two versions of a "moth" program. They
 are functionally equivalent. The first version is moth1.htm
-and moth2.js. The second version is moth2.htm, game.htm, and
+and moth1.js. The second version is moth2.htm, game.htm, and
 moth2.js. (moth1.js can be substituted for moth2.js.)
 
 game.htm contains the "game manager". This governs the game's
